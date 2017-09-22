@@ -16,7 +16,7 @@ import com.trello.rxlifecycle2.components.support.RxFragment;
 import java.lang.reflect.ParameterizedType;
 
 import static android.app.Activity.RESULT_OK;
-import static com.softgarden.baselibrary.base.BaseActivity.RESULT_LOGIN;
+import static com.softgarden.baselibrary.base.databinding.DataBindingActivity.RESULT_LOGIN;
 
 /**
  * MVP fragment基类
