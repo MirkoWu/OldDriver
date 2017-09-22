@@ -44,7 +44,7 @@ public class ImageUtil {
      * @param imageView
      * @param url
      */
-    @BindingAdapter({"app:img_load"})
+    @BindingAdapter({"img_load"})
     public static void load(ImageView imageView, String url) {
         Glide.with(imageView.getContext())
                 .load(checkUrl(url))
