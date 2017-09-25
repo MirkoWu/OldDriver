@@ -12,7 +12,7 @@ public class MainPresenter extends BasePresenter<MainContract.Display> implement
     @Override
     public void getJokeList() {
         RetrofitManager.getApiService()
-                .getJokeList()
+                .getJokeList(-103,10,1,null,null,null)
                 .compose(new NetworkTransformerHelper<>(mView))
                 .subscribe(mView::getJokeList, mView::showError);
     }

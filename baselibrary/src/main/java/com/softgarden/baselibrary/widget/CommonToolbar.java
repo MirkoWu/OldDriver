@@ -143,7 +143,7 @@ public class CommonToolbar extends Toolbar {
         public CommonToolbar build(Activity activity) {
             CommonToolbar toolbar = new CommonToolbar(activity);
             //setBackgroundColor
-            if (backgroundColorResId > 0) toolbar.setToolbarBackgroundColor(backgroundColorResId);
+            if (backgroundColorResId > 0) toolbar.setBackgroundColor(backgroundColorResId);
             //left
             if (TextUtils.isEmpty(leftStr)) {
                 if (leftStrResId > 0) toolbar.showTextLeft(leftStrResId, leftOnClickListener);
@@ -160,9 +160,9 @@ public class CommonToolbar extends Toolbar {
             if (rightImgResId > 0) toolbar.showImageRight(rightImgResId, rightOnClickListener);
             //title
             if (TextUtils.isEmpty(title)) {
-                if (titleResId > 0) toolbar.setToolbarTitle(titleResId);
-                else toolbar.setToolbarTitle(null);
-            } else toolbar.setToolbarTitle(title);
+                if (titleResId > 0) toolbar.setTitle(titleResId);
+                else toolbar.setTitle(null);
+            } else toolbar.setTitle(title);
 
             System.out.println("CommonToolbar.Builder.build");
             return toolbar;
@@ -255,17 +255,6 @@ public class CommonToolbar extends Toolbar {
     }
 
 
-    /**
-     * 设置标题
-     * 在使用Toolbar时，如果需要修改标题必须在onCreate()方法执行完成之后修改。
-     * 因为在onCreate()方法中设置任何标题值都会被重置为AndroidManifest中android:lable的值。
-     * 为了抵消这种行为，我们可以在onCreate()执行之后执行的onPostCreate()方法中执行修改标题的。
-     * <p>
-     * 不过我直接修改了setTitle()方法名 感觉是和toolbar的setTitle冲突了
-     *
-     * @param title
-     */
-
     @Override
     public void setTitle(CharSequence title) {
         tv_toolbar_title.setText(title);
@@ -281,20 +270,13 @@ public class CommonToolbar extends Toolbar {
         return tv_toolbar_title.getText().toString();
     }
 
-    public void setToolbarTitle(CharSequence title) {
-        tv_toolbar_title.setText(title);
-    }
-
-
-    public void setToolbarTitle(@StringRes int title) {
-        tv_toolbar_title.setText(title);
-    }
-
-    public void setToolbarTitleColor(@ColorRes int color) {
+   
+    public void setTitleColor(@ColorRes int color) {
         tv_toolbar_title.setTextColor(ContextCompat.getColor(getContext(), color));
     }
 
-    public void setToolbarBackgroundColor(@ColorRes int colorResId) {
+    @Override
+    public void setBackgroundColor(@ColorRes int colorResId) {
         layout_toolbar.setBackgroundColor(ContextCompat.getColor(getContext(), colorResId));
     }
 
@@ -306,13 +288,6 @@ public class CommonToolbar extends Toolbar {
             layout_toolbar.setPadding(0, statusBarHeight, 0, 0);
         }
     }
-
-
-    //开放get方法
-    public CharSequence getToolbarTitle() {
-        return tv_toolbar_title.getText().toString();
-    }
-
 
     public TextView getRightTextView() {
         return tv_toolbar_menu_right;

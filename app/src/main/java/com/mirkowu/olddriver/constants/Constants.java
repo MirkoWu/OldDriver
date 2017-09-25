@@ -17,4 +17,8 @@ public class Constants {
     /*** 直播*/
     public static final String URL_LIVE = "http://hotsoon.snssdk.com/hotsoon/feed/";
 
+    /*** 请求数量*/
+    public static final int PAGE_COUNT = 10;
+
+
 }
