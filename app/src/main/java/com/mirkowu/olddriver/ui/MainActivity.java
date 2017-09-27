@@ -14,6 +14,9 @@ import com.softgarden.baselibrary.databinding.LayoutRecyclerviewBinding;
 import com.softgarden.baselibrary.utils.EmptyUtil;
 import com.softgarden.baselibrary.widget.CommonToolbar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends RefreshActivity<MainPresenter, LayoutRecyclerviewBinding> implements MainContract.Display {
 
     DataBindingAdapter<JokeBean.DataBean> mAdapter;
@@ -31,16 +34,23 @@ public class MainActivity extends RefreshActivity<MainPresenter, LayoutRecyclerv
     @Override
     protected void initialize() {
         super.initialize();
-        MultiImageLoader multiImageLoader=new MultiImageLoader();
+        MultiImageLoader multiImageLoader = new MultiImageLoader();
         mAdapter = new DataBindingAdapter<JokeBean.DataBean>(R.layout.item_joke, BR.bean) {
             @Override
             public void onBindVH(BaseRVHolder holder, JokeBean.DataBean data, int position) {
                 ((MultiImageView) holder.getView(R.id.mMultiImageView))
                         .setImagesLoader(multiImageLoader);
-                if (data.getGroup() != null && data.getGroup().getLarge_image() != null && EmptyUtil.isNotEmpty(data.getGroup().getLarge_image().getUrl_list())){
-                    ((MultiImageView) holder.getView(R.id.mMultiImageView)).setList(data.getGroup().getLarge_image().getUrl_list());
+                List<JokeBean.DataBean.GroupBean.LargeImageBean> list = new ArrayList<>();
 
+                if (data.getGroup() != null) {
+                    if (data.getGroup().getIs_multi_image() == 1) {
+                        list.addAll(data.getGroup().getLarge_image_list());
+                    } else {
+                        if (data.getGroup().getLarge_image() != null && EmptyUtil.isNotEmpty(data.getGroup().getLarge_image().getUrl_list()))
+                            list.add(data.getGroup().getLarge_image());
+                    }
                 }
+                ((MultiImageView) holder.getView(R.id.mMultiImageView)).setList(list);
                 super.onBindVH(holder, data, position);
             }
         };
