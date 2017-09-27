@@ -9,6 +9,10 @@ package com.mirkowu.olddriver.constants;
 public interface Constants {
 
     /*** 请求数量*/
-    public static final int PAGE_COUNT = 10;
+    int PAGE_COUNT = 10;
 
+    /**
+     * 图片缓存路径
+     */
+    String IMAGE_PATH = "cache/image";
 }
