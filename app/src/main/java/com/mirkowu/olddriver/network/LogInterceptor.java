@@ -86,7 +86,7 @@ public class LogInterceptor implements Interceptor {
 
         /** * 添加Sign参数 */
         newBodyBuilder.add("data", data.toString());
-        //   newBodyBuilder.add("apisign", MD5Util.ToMD5(Constants.MD5_KEY, data.toString()));
+        //   newBodyBuilder.add("apisign", MD5Util.ToMD5(HostUrl.MD5_KEY, data.toString()));
         L.d("请求地址RequestUrl=====", oldUrl.url().toString());
         L.d("请求参数Params=========", data.toString());//打印请求log
 

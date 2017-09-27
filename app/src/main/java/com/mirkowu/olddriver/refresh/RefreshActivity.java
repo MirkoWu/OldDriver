@@ -13,9 +13,10 @@ import com.softgarden.baselibrary.widget.RefreshDelegateLayout;
 import java.util.List;
 
 /**
- * Created by DELL on 2017/7/28.
+ * @author by DELL
+ * @date on 2017/9/27
+ * @describe 通用的列表刷新Activity
  */
-
 public abstract class RefreshActivity<T extends IBasePresenter, B extends ViewDataBinding> extends BaseActivity<T, B> implements OnLoadMoreListener {
 
     RefreshDelegateLayout mRefreshLayout;
@@ -65,10 +66,9 @@ public abstract class RefreshActivity<T extends IBasePresenter, B extends ViewDa
      */
     public void setLoadMore(BaseRVAdapter adapter, List<?> list) {
         finishRefresh();
-        if (mPage == 1){
+        if (mPage == 1) {
             adapter.setData(list);
-        }
-        else {
+        } else {
             adapter.addData(list);
         }
 

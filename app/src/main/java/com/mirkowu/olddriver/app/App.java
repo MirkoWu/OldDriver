@@ -17,7 +17,13 @@ import com.softgarden.baselibrary.widget.RefreshDelegateLayout;
  * Created by MirkoWu on 2017/9/22 0022.
  */
 
-public class App extends BaseApplication{
+public class App extends BaseApplication {
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        //
+    }
+
     //static 代码段可以防止内存泄露
     static {
         //设置全局的Header构建器

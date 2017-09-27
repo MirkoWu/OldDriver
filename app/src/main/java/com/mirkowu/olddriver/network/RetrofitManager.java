@@ -1,6 +1,6 @@
 package com.mirkowu.olddriver.network;
 
-import com.mirkowu.olddriver.constants.Constants;
+import com.mirkowu.olddriver.constants.HostUrl;
 import com.mirkowu.olddriver.network.api.ApiService;
 import com.softgarden.baselibrary.utils.L;
 
@@ -30,7 +30,7 @@ public class RetrofitManager {
     }
 
     public static Retrofit getRetrofit() {
-        return new Retrofit.Builder().baseUrl(Constants.HOST_URL)
+        return new Retrofit.Builder().baseUrl(HostUrl.HOST_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(getOkHttpClient())
