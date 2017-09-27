@@ -1,24 +1,18 @@
 package com.mirkowu.olddriver.constants;
 
 /**
- * Created by MirkoWu on 2017/9/22 0022.
+ * @author by DELL
+ * @date on 2017/9/27
+ * @describe 常用的全局配置
  */
 
-public class Constants {
-    /*** baseUrl */
-    public static final String HOST_URL = "http://iu.snssdk.com/";
-
-    /***内涵段子 推荐 视频 图片 段子 段友秀*/
-    public static final String URL_JOKE = "neihan/stream/mix/v1/";
-
-    /*** 获取 content_type*/
-    public static final String URL_TYPE = "http://lf.snssdk.com/neihan/service/tabs/";
-
-    /*** 直播*/
-    public static final String URL_LIVE = "http://hotsoon.snssdk.com/hotsoon/feed/";
+public interface Constants {
 
     /*** 请求数量*/
-    public static final int PAGE_COUNT = 10;
+    int PAGE_COUNT = 10;
 
-
+    /**
+     * 图片缓存路径
+     */
+    String IMAGE_PATH = "cache/image";
 }

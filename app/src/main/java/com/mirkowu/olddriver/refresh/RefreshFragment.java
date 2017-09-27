@@ -7,16 +7,16 @@ import com.mirkowu.library.listener.OnLoadMoreListener;
 import com.mirkowu.olddriver.R;
 import com.mirkowu.olddriver.constants.Constants;
 import com.softgarden.baselibrary.base.BaseLazyFragment;
-import com.softgarden.baselibrary.base.databinding.BaseDataBindingFragment;
 import com.softgarden.baselibrary.base.IBasePresenter;
 import com.softgarden.baselibrary.widget.RefreshDelegateLayout;
 
 import java.util.List;
 
 /**
- * Created by DELL on 2017/7/28.
+ * @author by DELL
+ * @date on 2017/9/27
+ * @describe 通用的列表刷新Fragment
  */
-
 public abstract class RefreshFragment<T extends IBasePresenter, B extends ViewDataBinding> extends BaseLazyFragment<T, B> implements OnLoadMoreListener {
 
     RefreshDelegateLayout mRefreshLayout;

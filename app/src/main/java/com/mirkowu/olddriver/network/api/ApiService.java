@@ -4,7 +4,7 @@ package com.mirkowu.olddriver.network.api;
 import com.mirkowu.olddriver.bean.JokeBean;
 import com.mirkowu.olddriver.bean.LiveBean;
 import com.mirkowu.olddriver.bean.TypeBean;
-import com.mirkowu.olddriver.constants.Constants;
+import com.mirkowu.olddriver.constants.HostUrl;
 import com.mirkowu.olddriver.network.BaseBean;
 
 import java.util.List;
@@ -34,7 +34,7 @@ public interface ApiService {
      * @param ac           网络环境，可取值 wifi
      * @return
      */
-    @GET(Constants.URL_JOKE)
+    @GET(HostUrl.URL_JOKE)
     Observable<BaseBean<JokeBean>> getJokeList(
             @Query("content_type") int content_type,
             @Query("count") int count,
