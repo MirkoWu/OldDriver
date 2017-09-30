@@ -23,6 +23,7 @@ public class MultiImageView extends LinearLayout {
 
     // 照片的Url列表
     private List<?> imagesList;
+    private List<ImageView> imageViewList;
     private int childCount;
 
     /**
@@ -54,10 +55,10 @@ public class MultiImageView extends LinearLayout {
 
     @BindingAdapter("bindImages")
     public static void setData(MultiImageView multiImageView, List<?> lists) {
-        multiImageView.setList(lists);
+        multiImageView.setData(lists);
     }
 
-    public void setList(List<?> lists) throws IllegalArgumentException {
+    public void setData(List<?> lists) throws IllegalArgumentException {
         if (lists == null) {
             return;
         }
@@ -79,8 +80,14 @@ public class MultiImageView extends LinearLayout {
             }
             initImageLayoutParams();
         }
-
-        initView();
+//        if (imageViewList == null) {
+//            imageViewList = new ArrayList<>();
+            initView();
+//        } else {
+//            for (int i = 0; i < childCount; i++) {
+//                loadImageView(imageViewList.get(i), i);
+//            }
+//        }
     }
 
     @Override
@@ -90,7 +97,7 @@ public class MultiImageView extends LinearLayout {
             if (width > 0) {
                 MAX_WIDTH = width;
                 if (imagesList != null && imagesList.size() > 0) {
-                    setList(imagesList);
+                    setData(imagesList);
                 }
             }
         }
@@ -140,6 +147,8 @@ public class MultiImageView extends LinearLayout {
 
     // 根据imageView的数量初始化不同的View布局,还要为每一个View作点击效果
     private void initView() {
+
+
         this.setOrientation(VERTICAL);
         this.removeAllViews();
         if (MAX_WIDTH == 0) {
@@ -222,11 +231,16 @@ public class MultiImageView extends LinearLayout {
 
         // imageView.setOnClickListener(new ImageOnClickListener(position));
         // imageView.setBackgroundColor(getResources().getColor(R.color.color_press));
-        if (imagesLoader != null)
-            imagesLoader.loadImage(imageView, imagesList.get(position),childCount);
-        else throw new IllegalStateException("imagesLoader ==null ,请设置ImageLoader");
+        imageViewList.add(imageView);
+        loadImageView(imageView, position);
 
         return imageView;
+    }
+
+    private void loadImageView(ImageView imageView, int position) {
+        if (imagesLoader != null)
+            imagesLoader.loadImage(imageView, imagesList.get(position), position);
+        else throw new IllegalStateException("imagesLoader ==null ,请设置ImageLoader");
     }
 
     private class ImageOnClickListener implements OnClickListener {
@@ -256,6 +270,6 @@ public class MultiImageView extends LinearLayout {
     public ImagesLoader imagesLoader;
 
     public interface ImagesLoader<T> {
-        void loadImage(ImageView imageView, T imageBean,int size);
+        void loadImage(ImageView imageView, T imageBean, int position);
     }
 }

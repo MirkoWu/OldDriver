@@ -8,7 +8,7 @@ import com.mirkowu.olddriver.BR;
 import com.mirkowu.olddriver.R;
 import com.mirkowu.olddriver.bean.JokeBean;
 import com.mirkowu.olddriver.refresh.RefreshActivity;
-import com.mirkowu.olddriver.widget.MultiImageView;
+import com.mirkowu.olddriver.widget.NinePalacesView;
 import com.softgarden.baselibrary.base.databinding.DataBindingAdapter;
 import com.softgarden.baselibrary.databinding.LayoutRecyclerviewBinding;
 import com.softgarden.baselibrary.utils.EmptyUtil;
@@ -28,7 +28,7 @@ public class MainActivity extends RefreshActivity<MainPresenter, LayoutRecyclerv
 
     @Override
     protected CommonToolbar setToolbar() {
-        return new CommonToolbar.Builder().setTitle(R.string.app_name).build(this);
+        return new CommonToolbar.Builder().setBackButton(0).setTitle(R.string.app_name).build(this);
     }
 
     @Override
@@ -38,8 +38,12 @@ public class MainActivity extends RefreshActivity<MainPresenter, LayoutRecyclerv
         mAdapter = new DataBindingAdapter<JokeBean.DataBean>(R.layout.item_joke, BR.bean) {
             @Override
             public void onBindVH(BaseRVHolder holder, JokeBean.DataBean data, int position) {
-                ((MultiImageView) holder.getView(R.id.mMultiImageView))
-                        .setImagesLoader(multiImageLoader);
+                ((NinePalacesView) holder.getView(R.id.mMultiImageView)).setImagesLoader(multiImageLoader);
+                ((NinePalacesView) holder.getView(R.id.mMultiImageView)).setOnItemClickListener(new NinePalacesView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, int position) {
+                    }
+                });
                 List<JokeBean.DataBean.GroupBean.LargeImageBean> list = new ArrayList<>();
 
                 if (data.getGroup() != null) {
@@ -50,7 +54,7 @@ public class MainActivity extends RefreshActivity<MainPresenter, LayoutRecyclerv
                             list.add(data.getGroup().getLarge_image());
                     }
                 }
-                ((MultiImageView) holder.getView(R.id.mMultiImageView)).setList(list);
+                ((NinePalacesView) holder.getView(R.id.mMultiImageView)).setData(list);
                 super.onBindVH(holder, data, position);
             }
         };

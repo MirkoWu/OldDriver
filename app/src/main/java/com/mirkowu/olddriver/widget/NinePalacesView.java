@@ -4,12 +4,14 @@ import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.softgarden.baselibrary.utils.DisplayUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,8 +20,10 @@ import java.util.List;
 
 public class NinePalacesView extends LinearLayout {
     public static final int COLUMN_COUNT = 3;//每行item个数
+    public static final int PALACES_COUNT = 9;//
 
     List<?> imgList;//图片地址集合
+    List<ImageView> imageViewList;//图片地址集合
     int childCount;//格子数量
     int maxWidth;//view的最大宽度
     int eachWidth;//每个item宽度
@@ -43,10 +47,13 @@ public class NinePalacesView extends LinearLayout {
 
     public NinePalacesView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        if (imageViewList == null)
+            imageViewList = new ArrayList<>();
+        initView();
     }
 
     @BindingAdapter("bindImages")
-    public static void bindData(NinePalacesView ninePalacesView, List<?> list) {
+    public static void setData(NinePalacesView ninePalacesView, List<?> list) {
         ninePalacesView.setData(list);
     }
 
@@ -54,12 +61,18 @@ public class NinePalacesView extends LinearLayout {
         if (list == null || list.isEmpty()) return;
         childCount = list.size();
         imgList = list;
-        initView();
+
+
+        if (imageViewList!=null&&!imageViewList.isEmpty() && imageViewList.size() >= childCount) {
+            for (int i = 0; i < childCount; i++) {
+                loadImageView(imageViewList.get(i), i);
+            }
+        }
     }
 
     private void initView() {
         this.setOrientation(VERTICAL);
-        this.removeAllViews();
+        // this.removeAllViews();
         if (maxWidth == 0) {
             //为了触发onMeasure()来测量MultiImageView的最大宽度，MultiImageView的宽设置为match_parent
             addView(new View(getContext()));
@@ -74,8 +87,8 @@ public class NinePalacesView extends LinearLayout {
         itemParams = new LayoutParams(eachWidth, eachWidth);//每行的非第一个image
         itemParams.setMargins(imgPadding, 0, 0, 0);
 
-        int column = childCount % COLUMN_COUNT;
-        int rowCount = childCount / COLUMN_COUNT
+        int column = PALACES_COUNT % COLUMN_COUNT;
+        int rowCount = PALACES_COUNT / COLUMN_COUNT
                 + (column > 0 ? 1 : 0);// 行数
         for (int rowCursor = 0; rowCursor < rowCount; rowCursor++) {//添加行的容器
             LinearLayout rowLayout = new LinearLayout(getContext());
@@ -109,12 +122,20 @@ public class NinePalacesView extends LinearLayout {
             }
         });
 
-        if (imagesLoader != null)
-            imagesLoader.loadImage(iv, imgList.get(position));
-        else throw new IllegalStateException("imagesLoader ==null ,请设置ImageLoader");
-        //  ImageUtil.load(iv, imgList.get(position));//加载图片
+        imageViewList.add(iv);
+        loadImageView(iv, position);
 
         return iv;
+    }
+
+    private void loadImageView(ImageView imageView, int position) {
+        boolean show = position < childCount;
+        imageView.setVisibility(show ? VISIBLE : GONE);
+        Log.d("loadImageView", "pos=" + position);
+        if (!show) return;
+        if (imagesLoader != null)
+            imagesLoader.loadImage(imageView, imgList.get(position), childCount);
+        else throw new IllegalStateException("imagesLoader ==null ,请设置ImageLoader");
     }
 
     @Override
@@ -124,7 +145,7 @@ public class NinePalacesView extends LinearLayout {
             if (width > 0) {
                 maxWidth = width;//获取最大宽度
                 if (imgList != null && !imgList.isEmpty()) {
-                    setData(imgList);
+                    initView();
                 }
             }
         }
@@ -165,7 +186,7 @@ public class NinePalacesView extends LinearLayout {
     public ImagesLoader imagesLoader;
 
     public interface ImagesLoader<T> {
-        void loadImage(ImageView imageView, T imageBean);
+        void loadImage(ImageView imageView, T imageBean, int position);
     }
 
 }

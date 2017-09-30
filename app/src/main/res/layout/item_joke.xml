@@ -22,7 +22,7 @@
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
-        <com.mirkowu.olddriver.widget.MultiImageView
+        <com.mirkowu.olddriver.widget.NinePalacesView
             android:id="@+id/mMultiImageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
