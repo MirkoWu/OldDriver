@@ -208,12 +208,14 @@ public class JokeBean extends BaseObservable {
             private String type;
             private String status;
             private String has_comments;
+            private int is_multi_image;//是否多张图
+            private int is_gif;//是否是gif
             private LargeImageBean large_image;
+            private List<LargeImageBean> large_image_list;
             private String user_bury;
             private String status_desc;
             private String category_activity_end_time;
             private String display_type;
-            private String is_gif;
             private String user_digg;
             private String online_time;
             private String category_name;
@@ -242,6 +244,14 @@ public class JokeBean extends BaseObservable {
 
             public void setUser(UserBean user) {
                 this.user = user;
+            }
+
+            public int getIs_multi_image() {
+                return is_multi_image;
+            }
+
+            public void setIs_multi_image(int is_multi_image) {
+                this.is_multi_image = is_multi_image;
             }
 
             public String getText() {
@@ -274,6 +284,14 @@ public class JokeBean extends BaseObservable {
 
             public void setFavorite_count(String favorite_count) {
                 this.favorite_count = favorite_count;
+            }
+
+            public List<LargeImageBean> getLarge_image_list() {
+                return large_image_list;
+            }
+
+            public void setLarge_image_list(List<LargeImageBean> large_image_list) {
+                this.large_image_list = large_image_list;
             }
 
             public String getGo_detail_count() {
@@ -468,11 +486,11 @@ public class JokeBean extends BaseObservable {
                 this.display_type = display_type;
             }
 
-            public String getIs_gif() {
+            public int getIs_gif() {
                 return is_gif;
             }
 
-            public void setIs_gif(String is_gif) {
+            public void setIs_gif(int is_gif) {
                 this.is_gif = is_gif;
             }
 

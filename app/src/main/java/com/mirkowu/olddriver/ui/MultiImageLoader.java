@@ -12,9 +12,9 @@ import com.mirkowu.olddriver.widget.MultiImageView;
  * @describe
  */
 
-public class MultiImageLoader implements MultiImageView.ImagesLoader<JokeBean.DataBean.GroupBean.LargeImageBean.UrlListBean> {
+public class MultiImageLoader implements MultiImageView.ImagesLoader<JokeBean.DataBean.GroupBean.LargeImageBean> {
     @Override
-    public void loadImage(ImageView imageView, JokeBean.DataBean.GroupBean.LargeImageBean.UrlListBean imageBean, int size) {
-        ImageUtil.load(imageView, imageBean.getUrl());
+    public void loadImage(ImageView imageView, JokeBean.DataBean.GroupBean.LargeImageBean imageBean, int size) {
+        ImageUtil.load(imageView, imageBean.getUrl_list().get(0).getUrl());
     }
 }
