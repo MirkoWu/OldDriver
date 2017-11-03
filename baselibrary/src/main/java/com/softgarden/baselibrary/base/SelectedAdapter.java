@@ -1,9 +1,7 @@
 package com.softgarden.baselibrary.base;
 
 import android.support.annotation.LayoutRes;
-import android.view.View;
 
-import com.mirkowu.library.BaseRVHolder;
 import com.softgarden.baselibrary.base.databinding.DataBindingAdapter;
 
 import java.util.ArrayList;
@@ -70,31 +68,31 @@ public class SelectedAdapter<T> extends DataBindingAdapter<T> {
         notifyDataSetChanged();
     }
 
-    @Override
-    protected void onItemClick(View v, int position) {
-        super.onItemClick(v, position);
-        //设置选择器
-        if (openSelecter) {
-            if (multiSelected) {
-                if (selectList.contains(position)) {
-                    selectList.remove((Integer) position);
-                } else {
-                    selectList.add(position);
-                }
-            } else {
-                if (selectIndex > -1) notifyItemChanged(selectIndex);
-                selectIndex = position;
-            }
-            notifyItemChanged(position);
-        }
-    }
-
-    @Override
-    public void onBindViewHolder(BaseRVHolder holder, int position) {
-        holder.isSelected = multiSelected ? selectList.contains(position) : selectIndex == position;//设置状态
-        holder.itemView.setSelected(holder.isSelected);
-        super.onBindViewHolder(holder, position);
-    }
+//    @Override
+//    protected void onItemClick(View v, int position) {
+//        super.onItemClick(v, position);
+//        //设置选择器
+//        if (openSelecter) {
+//            if (multiSelected) {
+//                if (selectList.contains(position)) {
+//                    selectList.remove((Integer) position);
+//                } else {
+//                    selectList.add(position);
+//                }
+//            } else {
+//                if (selectIndex > -1) notifyItemChanged(selectIndex);
+//                selectIndex = position;
+//            }
+//            notifyItemChanged(position);
+//        }
+//    }
+//
+//    @Override
+//    public void onBindViewHolder(BaseRVHolder holder, int position) {
+//        holder.isSelected = multiSelected ? selectList.contains(position) : selectIndex == position;//设置状态
+//        holder.itemView.setSelected(holder.isSelected);
+//        super.onBindViewHolder(holder, position);
+//    }
 
 
 }

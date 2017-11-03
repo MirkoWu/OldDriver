@@ -1,9 +1,9 @@
 package com.mirkowu.olddriver.refresh;
 
 import android.databinding.ViewDataBinding;
+import android.support.v7.widget.RecyclerView;
 
-import com.mirkowu.library.BaseRVAdapter;
-import com.mirkowu.library.listener.OnLoadMoreListener;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mirkowu.olddriver.R;
 import com.mirkowu.olddriver.constants.Constants;
 import com.softgarden.baselibrary.base.BaseLazyFragment;
@@ -17,7 +17,7 @@ import java.util.List;
  * @date on 2017/9/27
  * @describe 通用的列表刷新Fragment
  */
-public abstract class RefreshFragment<T extends IBasePresenter, B extends ViewDataBinding> extends BaseLazyFragment<T, B> implements OnLoadMoreListener {
+public abstract class RefreshFragment<T extends IBasePresenter, B extends ViewDataBinding> extends BaseLazyFragment<T, B> implements BaseQuickAdapter.RequestLoadMoreListener {
 
     RefreshDelegateLayout mRefreshLayout;
     protected int mPage = 1;
@@ -53,21 +53,22 @@ public abstract class RefreshFragment<T extends IBasePresenter, B extends ViewDa
         if (mRefreshLayout != null) mRefreshLayout.setEnableRefresh(false);
     }
 
-    public void setLoadMore(BaseRVAdapter adapter, List<?> list) {
+    public void setLoadMore(RecyclerView recyclerView, BaseQuickAdapter adapter, List<?> list) {
         finishRefresh();
-        if (mPage == 1) adapter.setData(list);
+        if (mPage == 1) adapter.setNewData(list);
         else adapter.addData(list);
 
         if (list == null || list.size() < Constants.PAGE_COUNT) {
             adapter.loadMoreEnd();
         } else {
-            adapter.setOnLoadMoreListener(this);
+            adapter.setOnLoadMoreListener(this,recyclerView);
             adapter.loadMoreComplete();
         }
     }
 
+
     @Override
-    public void onLoadMore() {
+    public void onLoadMoreRequested() {
 
     }
 }

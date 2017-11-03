@@ -2,8 +2,8 @@ package com.mirkowu.olddriver.ui;
 
 import android.view.View;
 
-import com.mirkowu.library.BaseRVHolder;
-import com.mirkowu.library.listener.OnItemClickListener;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.mirkowu.olddriver.BR;
 import com.mirkowu.olddriver.R;
 import com.mirkowu.olddriver.bean.JokeBean;
@@ -37,7 +37,7 @@ public class MainActivity extends RefreshActivity<MainPresenter, LayoutRecyclerv
         MultiImageLoader multiImageLoader = new MultiImageLoader();
         mAdapter = new DataBindingAdapter<JokeBean.DataBean>(R.layout.item_joke, BR.bean) {
             @Override
-            public void onBindVH(BaseRVHolder holder, JokeBean.DataBean data, int position) {
+            protected void convert(BaseViewHolder holder, JokeBean.DataBean data) {
                 ((NinePalacesView) holder.getView(R.id.mMultiImageView)).setImagesLoader(multiImageLoader);
                 ((NinePalacesView) holder.getView(R.id.mMultiImageView)).setOnItemClickListener(new NinePalacesView.OnItemClickListener() {
                     @Override
@@ -55,16 +55,17 @@ public class MainActivity extends RefreshActivity<MainPresenter, LayoutRecyclerv
                     }
                 }
                 ((NinePalacesView) holder.getView(R.id.mMultiImageView)).setData(list);
-                super.onBindVH(holder, data, position);
+                super.convert(holder, data);
             }
         };
         binding.mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(new OnItemClickListener<JokeBean.DataBean>() {
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
-            public void onItemClickListener(View itemView, JokeBean.DataBean data, int position) {
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 openActivity(SplashActivity.class);
             }
         });
+
         onRefresh();
     }
 
@@ -77,6 +78,6 @@ public class MainActivity extends RefreshActivity<MainPresenter, LayoutRecyclerv
     @Override
     public void getJokeList(JokeBean data) {
         finishRefresh();
-        mAdapter.setData(data.getData());
+        mAdapter.setNewData(data.getData());
     }
 }
