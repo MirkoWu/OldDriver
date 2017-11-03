@@ -1,6 +1,7 @@
 package com.softgarden.baselibrary.base.databinding;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.databinding.DataBindingUtil;
@@ -17,7 +18,7 @@ import android.widget.LinearLayout;
 import com.softgarden.baselibrary.R;
 import com.softgarden.baselibrary.base.IBaseDisplay;
 import com.softgarden.baselibrary.widget.CommonToolbar;
-import com.softgarden.baselibrary.widget.LoadingDialog;
+import com.softgarden.baselibrary.widget.LoadDialogManager;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 
@@ -139,28 +140,16 @@ public abstract class DataBindingActivity<B extends ViewDataBinding> extends RxA
         return this;
     }
 
-    private LoadingDialog mLoadingDialog;
-    private int showLoadingDialog = 0;
 
     @Override
     public synchronized void showProgressDialog() {
-        if (showLoadingDialog == 0) {
-            if (mLoadingDialog == null) mLoadingDialog = new LoadingDialog(getActivity());
-            if (!this.isFinishing()) {
-                if (!this.isFinishing()) mLoadingDialog.show();
-            }
-        }
-        showLoadingDialog++;
+        LoadDialogManager.showLoading(getActivity());
     }
 
-
+    @Override
     public synchronized void hideProgressDialog() {
-        showLoadingDialog--;
-        if (mLoadingDialog != null && showLoadingDialog == 0) {
-            mLoadingDialog.dismiss();
-        }
+        LoadDialogManager.dismissLoading();
     }
-
 
     /**
      * 权限提示对话框
@@ -171,16 +160,23 @@ public abstract class DataBindingActivity<B extends ViewDataBinding> extends RxA
         new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.tips_message)
                 .setMessage(R.string.permission_lack)
-                .setNegativeButton(R.string.cancel, (dialog, which) -> {
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
                 })
-                .setPositiveButton(R.string.ok, (dialog, which) -> startAppSettings()).show();
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startAppSettings();
+                    }
+                }).show();
     }
 
     /**
      * 启动当前应用设置页面
      */
-
-
     public void startAppSettings() {
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         intent.setData(Uri.parse("package:" + getPackageName()));

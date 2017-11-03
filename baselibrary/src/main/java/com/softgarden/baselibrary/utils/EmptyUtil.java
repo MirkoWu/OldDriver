@@ -48,4 +48,26 @@ public class EmptyUtil {
     public static String nullIfEmpty(@Nullable String str) {
         return isEmpty(str) ? null : str;
     }
+
+
+    /**
+     * 是否为0
+     *
+     * @param numStr
+     * @return
+     */
+    public static boolean isZero(String numStr) {
+        float n;
+        try {
+            n = Float.valueOf(numStr);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return n == 0;
+
+    }
+
+    public static boolean isNotZero(String numStr) {
+        return !isZero(numStr);
+    }
 }

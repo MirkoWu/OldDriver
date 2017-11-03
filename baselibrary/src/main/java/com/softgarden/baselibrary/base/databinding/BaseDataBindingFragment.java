@@ -11,12 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.softgarden.baselibrary.base.BaseActivity;
 import com.softgarden.baselibrary.base.IBaseDisplay;
-import com.softgarden.baselibrary.utils.InstanceUtil;
-import com.softgarden.baselibrary.widget.LoadingDialog;
 import com.trello.rxlifecycle2.components.support.RxFragment;
-
-import java.lang.reflect.ParameterizedType;
 
 import static android.app.Activity.RESULT_OK;
 import static com.softgarden.baselibrary.base.databinding.DataBindingActivity.RESULT_LOGIN;
@@ -96,28 +93,16 @@ public abstract class BaseDataBindingFragment<B extends ViewDataBinding> extends
         this.startActivity(new Intent(getActivity(), cls));
     }
 
-
-    private LoadingDialog mLoadingDialog;
-    private int showLoadingDialog = 0;
-
     @Override
     public synchronized void showProgressDialog() {
-        if (showLoadingDialog == 0) {
-            if (mLoadingDialog == null)
-                mLoadingDialog = new LoadingDialog(getActivity());
-            if (!getActivity().isFinishing()) {
-                mLoadingDialog.show();
-            }
-        }
-        showLoadingDialog++;
+        if (getActivity() instanceof BaseActivity)
+            ((BaseActivity) getActivity()).showProgressDialog();
     }
 
     @Override
     public synchronized void hideProgressDialog() {
-        showLoadingDialog--;
-        if (mLoadingDialog != null && showLoadingDialog == 0) {
-            mLoadingDialog.dismiss();
-        }
+        if (getActivity() instanceof BaseActivity)
+            ((BaseActivity) getActivity()).hideProgressDialog();
     }
 
     @Override

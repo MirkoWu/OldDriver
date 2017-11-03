@@ -7,16 +7,16 @@ package com.mirkowu.olddriver.constants;
  */
 public interface HostUrl {
     /*** baseUrl */
-    public static final String HOST_URL = "http://iu.snssdk.com/";
+     String HOST_URL = "http://iu.snssdk.com/";
 
     /***内涵段子 推荐 视频 图片 段子 段友秀*/
-    public static final String URL_JOKE = "neihan/stream/mix/v1/";
+     String URL_JOKE = "neihan/stream/mix/v1/";
 
     /*** 获取 content_type*/
-    public static final String URL_TYPE = "http://lf.snssdk.com/neihan/service/tabs/";
+     String URL_TYPE = "http://lf.snssdk.com/neihan/service/tabs/";
 
     /*** 直播*/
-    public static final String URL_LIVE = "http://hotsoon.snssdk.com/hotsoon/feed/";
+     String URL_LIVE = "http://hotsoon.snssdk.com/hotsoon/feed/";
 
 
 
