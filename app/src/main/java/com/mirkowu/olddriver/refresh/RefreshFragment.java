@@ -17,7 +17,8 @@ import java.util.List;
  * @date on 2017/9/27
  * @describe 通用的列表刷新Fragment
  */
-public abstract class RefreshFragment<T extends IBasePresenter, B extends ViewDataBinding> extends BaseLazyFragment<T, B> implements BaseQuickAdapter.RequestLoadMoreListener {
+public abstract class RefreshFragment<T extends IBasePresenter, B extends ViewDataBinding>
+        extends BaseLazyFragment<T, B> implements BaseQuickAdapter.RequestLoadMoreListener {
 
     RefreshDelegateLayout mRefreshLayout;
     protected int mPage = 1;

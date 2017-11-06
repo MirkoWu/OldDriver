@@ -49,9 +49,9 @@ public class ImageUtil {
         Glide.with(imageView.getContext())
                 .load(checkUrl(url))
                 .dontAnimate()
-                .placeholder(R.mipmap.ic_launcher)
-                .error(R.mipmap.ic_launcher)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.mipmap.loading_square)
+                .error(R.mipmap.loading_square)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(imageView);
     }
 
@@ -67,9 +67,9 @@ public class ImageUtil {
         Glide.with(imageView.getContext())
                 .load(checkUrl(url))
                 .dontAnimate()
-                .placeholder(R.mipmap.ic_launcher)
-                .error(R.mipmap.ic_launcher)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.mipmap.loading_rec)
+                .error(R.mipmap.loading_rec)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(imageView);
     }
 
@@ -104,8 +104,8 @@ public class ImageUtil {
                 .load(checkUrl(url))
                 .dontAnimate()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(R.mipmap.ic_launcher)
-                .error(R.mipmap.ic_launcher)
+                .placeholder(R.mipmap.loading_square)
+                .error(R.mipmap.loading_square)
                 .into(imageView);
     }
 
@@ -121,9 +121,9 @@ public class ImageUtil {
         Glide.with(imageView.getContext())
                 .load(checkUrl(url))
                 .dontAnimate()
-                .placeholder(R.mipmap.ic_launcher)
+                .placeholder(R.mipmap.loading_square)
                 // .bitmapTransform(new BlurTransformation(imageView.getContext(), 1, 3))
-                .error(R.mipmap.ic_launcher)
+                .error(R.mipmap.loading_square)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageView);
     }
@@ -135,7 +135,7 @@ public class ImageUtil {
                 .dontAnimate()
                 // .placeholder(R.mipmap.ic_launcher)
                 // .bitmapTransform(new BlurTransformation(imageView.getContext(), radius, sampling))
-                .error(R.mipmap.ic_launcher)
+                .error(R.mipmap.loading_square)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageView);
     }
@@ -148,8 +148,8 @@ public class ImageUtil {
                 .thumbnail(0.5f)
                 .dontAnimate()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(R.mipmap.ic_launcher)
-                .error(R.mipmap.ic_launcher)
+                .placeholder(R.mipmap.loading_square)
+                .error(R.mipmap.loading_square)
                 .into(imageView);
     }
 

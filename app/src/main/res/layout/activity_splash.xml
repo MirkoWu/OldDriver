@@ -2,36 +2,20 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
+<data>
+    <variable
+        name="bean"
+        type="com.mirkowu.olddriver.bean.JokeBean"></variable>
+</data>
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.mirkowu.olddriver.ui.SplashActivity">
+        android:layout_height="wrap_content"
+        tools:context="com.mirkowu.olddriver.ui.splash.SplashActivity">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/iv_splash"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <com.mirkowu.olddriver.widget.RxTextAutoZoom
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="缩放的字体" />
-
-            <com.mirkowu.olddriver.widget.RxTextAutoZoom
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:text="缩放的字体缩放的字体缩放的字体缩放的字体" />
-
-            <com.mirkowu.olddriver.widget.RxTextAutoZoom
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:text="缩放的字体缩放的字体缩放的字体"
-                android:textSize="12dp" />
-        </LinearLayout>
+            android:layout_height="match_parent" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

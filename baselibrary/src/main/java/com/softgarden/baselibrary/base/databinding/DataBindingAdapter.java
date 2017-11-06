@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * @author by DELL
  * @date on 2017/11/3
- * @describe
+ * @describe 使用DataBinding的Adapter  可以通用
  */
 
 public class DataBindingAdapter<T> extends BaseQuickAdapter<T, BaseViewHolder> {

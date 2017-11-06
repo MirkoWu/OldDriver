@@ -1,7 +1,9 @@
 package com.softgarden.baselibrary.base;
 
 import android.support.annotation.LayoutRes;
+import android.support.annotation.Nullable;
 
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.softgarden.baselibrary.base.databinding.DataBindingAdapter;
 
 import java.util.ArrayList;
@@ -87,12 +89,19 @@ public class SelectedAdapter<T> extends DataBindingAdapter<T> {
 //        }
 //    }
 //
-//    @Override
-//    public void onBindViewHolder(BaseRVHolder holder, int position) {
-//        holder.isSelected = multiSelected ? selectList.contains(position) : selectIndex == position;//设置状态
-//        holder.itemView.setSelected(holder.isSelected);
-//        super.onBindViewHolder(holder, position);
-//    }
+
+
+    @Override
+    public void setOnItemClickListener(@Nullable OnItemClickListener listener) {
+        super.setOnItemClickListener(listener);
+    }
+
+    @Override
+    public void onBindViewHolder(BaseViewHolder holder, int position) {
+        boolean isSelected = multiSelected ? selectList.contains(position) : selectIndex == position;//设置状态
+        holder.itemView.setSelected(isSelected);
+        super.onBindViewHolder(holder, position);
+    }
 
 
 }
