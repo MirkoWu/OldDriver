@@ -1,7 +1,7 @@
 package com.softgarden.baselibrary.base;
 
 import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.softgarden.baselibrary.base.databinding.DataBindingAdapter;
@@ -70,30 +70,23 @@ public class SelectedAdapter<T> extends DataBindingAdapter<T> {
         notifyDataSetChanged();
     }
 
-//    @Override
-//    protected void onItemClick(View v, int position) {
-//        super.onItemClick(v, position);
-//        //设置选择器
-//        if (openSelecter) {
-//            if (multiSelected) {
-//                if (selectList.contains(position)) {
-//                    selectList.remove((Integer) position);
-//                } else {
-//                    selectList.add(position);
-//                }
-//            } else {
-//                if (selectIndex > -1) notifyItemChanged(selectIndex);
-//                selectIndex = position;
-//            }
-//            notifyItemChanged(position);
-//        }
-//    }
-//
-
-
     @Override
-    public void setOnItemClickListener(@Nullable OnItemClickListener listener) {
-        super.setOnItemClickListener(listener);
+    public void setOnItemClick(View v, int position) {
+        super.setOnItemClick(v, position);
+          //设置选择器
+        if (openSelecter) {
+            if (multiSelected) {
+                if (selectList.contains(position)) {
+                    selectList.remove((Integer) position);
+                } else {
+                    selectList.add(position);
+                }
+            } else {
+                if (selectIndex > -1) notifyItemChanged(selectIndex);
+                selectIndex = position;
+            }
+            notifyItemChanged(position);
+        }
     }
 
     @Override
