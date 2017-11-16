@@ -20,5 +20,5 @@ public interface HostUrl {
 
 
 
-
+    String HOME_ORDER_ADD = "App/Order/orderAdd";//订单添加
 }

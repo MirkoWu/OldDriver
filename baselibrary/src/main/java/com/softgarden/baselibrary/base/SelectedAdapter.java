@@ -95,6 +95,4 @@ public class SelectedAdapter<T> extends DataBindingAdapter<T> {
         holder.itemView.setSelected(isSelected);
         super.onBindViewHolder(holder, position);
     }
-
-
 }

@@ -39,13 +39,14 @@ public class RetrofitManager {
 
     public static OkHttpClient getOkHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                //  .addInterceptor(loggingInterceptor)
                 //设置超时
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS)
                 .writeTimeout(20, TimeUnit.SECONDS)
                 //错误重连
                 .addInterceptor(new LogInterceptor())// 拦截器
+                .addInterceptor(new ParameterInterceptor())// 拦截器
+                .addInterceptor(loggingInterceptor)
                 .retryOnConnectionFailure(true);
 
 

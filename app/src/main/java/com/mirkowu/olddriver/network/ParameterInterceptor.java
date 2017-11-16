@@ -1,9 +1,12 @@
 package com.mirkowu.olddriver.network;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.mirkowu.olddriver.BuildConfig;
+import com.mirkowu.olddriver.constants.Constants;
 import com.softgarden.baselibrary.utils.L;
+import com.softgarden.baselibrary.utils.MD5Util;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,10 +16,12 @@ import java.io.IOException;
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
+import okhttp3.MultipartBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import okio.Buffer;
 
 
 /**
@@ -51,6 +56,7 @@ public class ParameterInterceptor implements Interceptor {
         return response;
     }
 
+
     @NonNull
     private RequestBody makeRequestBody(Request oldRequest) {
         HttpUrl oldUrl = oldRequest.url();
@@ -58,23 +64,10 @@ public class ParameterInterceptor implements Interceptor {
         JSONObject data = new JSONObject();
         try {
 
-            /** 链接上的参数 */
-//        for (int i = oldUrl.querySize() - 1; i >= 0; i--) {
-//            String name = oldUrl.queryParameterName(i);
-//            String value = oldUrl.queryParameterValue(i);
-//            data.put(name, value);
-//        }
-
-//            String userID = SP.getUserID();
-//            if(!TextUtils.isEmpty(userID)){
-//                data.put("token", SP.getToken());
-//                data.put("user_id", userID);
-//            }
-
-
-            /** Body上的参数 */
-            //这里要判断下  不然参数为空时会classCastException
             if (oldRequest.body() instanceof FormBody) {
+                /*** 当参数以 @Field @FieldMap 提交时 */
+                L.d(TAG,"instanceof FormBody");
+
                 FormBody body = (FormBody) oldRequest.body();
                 if (body != null)
                     for (int i = body.size() - 1; i >= 0; i--) {
@@ -82,20 +75,56 @@ public class ParameterInterceptor implements Interceptor {
                         String value = body.value(i);
                         data.put(name, value);
                     }
+            } else if (oldRequest.body() instanceof MultipartBody) {
+                /*** 当参数以 @MultipartBody 提交时 */
+                L.d(TAG,"instanceof MultipartBody");
+
+            } else {/*** 当参数以 @Body 提交时 */
+                String bodyString = bodyToString(oldRequest.body());
+                if (!TextUtils.isEmpty(bodyString)) {
+                    data = new JSONObject(bodyString);
+                    L.d("bodyToString---", bodyString);
+                }
             }
+
+//            /** 链接上的参数 放在最后 */
+//            for (int i = oldUrl.querySize() - 1; i >= 0; i--) {
+//                String name = oldUrl.queryParameterName(i);
+//                String value = oldUrl.queryParameterValue(i);
+//                data.put(name, value);
+//            }
+
+//            /*** 统一添加参数*/
+//            String userID = SP.getUserID();
+//            if (!TextUtils.isEmpty(userID)) {
+//                data.put("token", SP.getToken());
+//                data.put("user_id", userID);
+//            }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-
-        /** * 添加Sign参数 */
+        /*** 添加Sign参数 */
         newBodyBuilder.add("data", data.toString());
-     //   newBodyBuilder.add("apisign", MD5Util.ToMD5(Constants.MD5_KEY, data.toString()));
+        newBodyBuilder.add("apisign", MD5Util.ToMD5(Constants.MD5_KEY, data.toString()));
         L.d("请求地址RequestUrl=====", oldUrl.url().toString());
         L.d("请求参数Params=========", data.toString());//打印请求log
 
         return newBodyBuilder.build();
     }
 
-
+    private static String bodyToString(final RequestBody request) {
+        try {
+            final RequestBody copy = request;
+            final Buffer buffer = new Buffer();
+            if (copy != null)
+                copy.writeTo(buffer);
+            else
+                return "";
+            return buffer.readUtf8();
+        } catch (final IOException e) {
+            return "did not work";
+        }
+    }
 }

@@ -25,10 +25,14 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 ext {
     //Version
     versionCode = 1
     versionName = "1.0"
+
     //SDK And Tools
     minSdkVersion = 16
     targetSdkVersion = 26
@@ -37,4 +41,10 @@ ext {
 
     //Dependencies
     supportLibraryVersion = '26.1.0'
+
+    //keystore
+    keystorePath = properties.getProperty("keystorePath")
+    keystorePassword = properties.getProperty("keystorePassword")
+    alias = properties.getProperty("alias")
+    aliasPassword = properties.getProperty("aliasPassword")
 }

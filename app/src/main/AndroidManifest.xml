@@ -17,17 +17,18 @@
             android:name="com.mirkowu.olddriver.utils.MyGlideModule"
             android:value="GlideModule" />
 
-        <activity android:name=".ui.splash.SplashActivity">
+        <activity android:name=".ui.splash.SplashActivity"></activity>
+        <activity android:name=".ui.MainActivity">
 
         </activity>
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.PreviewActivity" />
+        <activity android:name=".ui.testParams.ParamsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.PreviewActivity"></activity>
     </application>
 
 </manifest>
