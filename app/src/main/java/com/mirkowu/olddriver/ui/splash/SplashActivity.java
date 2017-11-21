@@ -1,6 +1,8 @@
 package com.mirkowu.olddriver.ui.splash;
 
 
+import android.os.Looper;
+
 import com.mirkowu.olddriver.R;
 import com.mirkowu.olddriver.databinding.ActivitySplashBinding;
 import com.softgarden.baselibrary.base.databinding.DataBindingActivity;
@@ -20,7 +22,6 @@ public class SplashActivity extends DataBindingActivity<ActivitySplashBinding> {
 
     @Override
     protected void initialize() {
-
     }
 
     @Override
