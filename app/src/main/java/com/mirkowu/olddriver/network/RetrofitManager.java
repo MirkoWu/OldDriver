@@ -44,11 +44,9 @@ public class RetrofitManager {
                 .readTimeout(20, TimeUnit.SECONDS)
                 .writeTimeout(20, TimeUnit.SECONDS)
                 //错误重连
-                .addInterceptor(new LogInterceptor())// 拦截器
-                .addInterceptor(new ParameterInterceptor())// 拦截器
+                //.addInterceptor(new ParameterInterceptor())// 参数拦截器
                 .addInterceptor(loggingInterceptor)
                 .retryOnConnectionFailure(true);
-
 
         return builder.build();
     }

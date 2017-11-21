@@ -15,5 +15,4 @@ public interface Constants {
      * 图片缓存路径
      */
     String IMAGE_PATH = "cache/image";
-    public static final String MD5_KEY = "d367f4699214cec412f7c2a1d513fe05";
 }

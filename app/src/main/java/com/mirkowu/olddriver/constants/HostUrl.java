@@ -19,6 +19,4 @@ public interface HostUrl {
      String URL_LIVE = "http://hotsoon.snssdk.com/hotsoon/feed/";
 
 
-
-    String HOME_ORDER_ADD = "App/Order/orderAdd";//订单添加
 }

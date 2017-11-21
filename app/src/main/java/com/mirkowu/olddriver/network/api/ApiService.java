@@ -5,18 +5,11 @@ import com.mirkowu.olddriver.bean.JokeBean;
 import com.mirkowu.olddriver.bean.LiveBean;
 import com.mirkowu.olddriver.bean.TypeBean;
 import com.mirkowu.olddriver.network.BaseBean;
-import com.mirkowu.olddriver.ui.testParams.ParamsPresenter;
-
-import org.json.JSONObject;
 
 import java.util.List;
 
 import io.reactivex.Observable;
-import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
 
@@ -54,39 +47,5 @@ public interface ApiService {
 
     @GET
     Observable<LiveBean> getLiveList(@Url String url);
-
-
-    @FormUrlEncoded
-    @POST
-    Observable<BaseBean<String>> orderAdd(@Url String url,
-                                          @Field("token") String token,
-                                          @Field("user_id") String user_id,
-                                          @Field("buys") String buys,
-                                          @Field("address_id") String address_id,
-                                          @Field("remark") JSONObject remark
-    );
-  @FormUrlEncoded
-    @POST
-    Observable<BaseBean<String>> orderAdd(@Url String url,
-                                          @Field("token") String token,
-                                          @Field("user_id") String user_id,
-                                          @Field("buys") String buys,
-                                          @Field("address_id") String address_id,
-                                          @Field("remark") String remark
-    );
-
-    @POST
-    Observable<BaseBean<String>> orderAdd(@Url String url,
-                                          @Body ParamsPresenter.SubmitBean submitBean
-    );
-
-
-
-    @FormUrlEncoded
-    @POST
-    Observable<BaseBean<String>> orderAdd(@Url String url,
-                                          @Field("data") String data,
-                                          @Field("apisign") String apisign
-    );
 
 }

@@ -4,9 +4,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.mirkowu.olddriver.BuildConfig;
-import com.mirkowu.olddriver.constants.Constants;
 import com.softgarden.baselibrary.utils.L;
-import com.softgarden.baselibrary.utils.MD5Util;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,7 +24,7 @@ import okio.Buffer;
 
 /**
  * Created by Administrator on 2016/10/10.
- * 参数格式为Json格式的拦截器
+ * 参数拦截器
  */
 
 public class ParameterInterceptor implements Interceptor {
@@ -48,7 +46,7 @@ public class ParameterInterceptor implements Interceptor {
                 L.e(result);
             }
 
-         /*   * 因为调用ResponseBody.string()后即关闭，后续无法获取内容 */
+         /*** 因为调用ResponseBody.string()后即关闭，后续无法获取内容 */
             response = response.newBuilder()
                     .body(ResponseBody.create(resultBody.contentType(), result))
                     .build();
@@ -107,7 +105,7 @@ public class ParameterInterceptor implements Interceptor {
 
         /*** 添加Sign参数 */
         newBodyBuilder.add("data", data.toString());
-        newBodyBuilder.add("apisign", MD5Util.ToMD5(Constants.MD5_KEY, data.toString()));
+      //  newBodyBuilder.add("apisign", MD5Util.ToMD5(Constants.MD5_KEY, data.toString()));
         L.d("请求地址RequestUrl=====", oldUrl.url().toString());
         L.d("请求参数Params=========", data.toString());//打印请求log
 
