@@ -8,7 +8,6 @@ import com.mirkowu.olddriver.BR;
 import com.mirkowu.olddriver.R;
 import com.mirkowu.olddriver.bean.JokeBean;
 import com.mirkowu.olddriver.refresh.RefreshActivity;
-import com.mirkowu.olddriver.ui.splash.SplashActivity;
 import com.softgarden.baselibrary.databinding.LayoutRecyclerviewBinding;
 import com.softgarden.baselibrary.widget.CommonToolbar;
 
@@ -36,7 +35,7 @@ public class MainActivity extends RefreshActivity<MainPresenter, LayoutRecyclerv
         jokeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                openActivity(SplashActivity.class);
+                // TODO: 2017/11/22 详情
             }
         });
 
