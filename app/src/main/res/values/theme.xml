@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="BaseAppTheme" />
+    <!-- Base application theme. -->
+
+    <style name="BaseAppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <!--ActionBarDrawerToggle设置颜色-->
+        <item name="colorControlNormal">@android:color/white</item>
+    </style>
+
+    <!--TranslucentTheme 沉浸式 >=19 -->
+    <style name="TranslucentTheme" parent="AppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <!--  <item name="android:windowTranslucentStatus">true</item>-->
+    </style>
+
+    <!--FullScreenTheme 全屏-->
+    <style name="FullScreenTheme" parent="AppTheme">
+        <item name="colorPrimary">@android:color/transparent</item>
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <!--TransparentTheme 透明-->
+    <style name="TransparentTheme" parent="AppTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+    </style>
+</resources>
