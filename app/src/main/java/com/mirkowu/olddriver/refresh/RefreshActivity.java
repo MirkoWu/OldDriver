@@ -41,6 +41,15 @@ public abstract class RefreshActivity<T extends IBasePresenter, B extends ViewDa
 
     public abstract void onRefresh();
 
+
+
+    /**
+     * 自动刷新
+     */
+    public void autoRefresh() {
+        if (mRefreshLayout != null) mRefreshLayout.autoRefresh(0);
+    }
+
     /**
      * 结束刷新
      */
