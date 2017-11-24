@@ -1,6 +1,6 @@
 package com.softgarden.baselibrary.widget;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.DialogInterface;
 
 /**
@@ -16,9 +16,9 @@ public class LoadDialogManager {
     private LoadDialogManager() {
     }
 
-    public static void showLoading(Context context) {
+    public static void showLoading(Activity activity) {
         if (mCount == 0) {
-            mLoadingDialog = new LoadingDialog(context);
+            mLoadingDialog = new LoadingDialog(activity);
             mLoadingDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialogInterface) {
