@@ -5,6 +5,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
 import com.mirkowu.olddriver.R;
 import com.softgarden.baselibrary.base.BaseActivity;
 import com.trello.rxlifecycle2.android.ActivityEvent;
@@ -54,6 +56,19 @@ public class ImageUtil {
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(imageView);
     }
+
+     public static void load(ImageView imageView, String url, RequestListener<String, GlideDrawable> listener) {
+        Glide.with(imageView.getContext())
+                .load(checkUrl(url))
+                .dontAnimate()
+                .placeholder(R.mipmap.loading_square)
+                .listener(listener)
+                .error(R.mipmap.loading_square)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .into(imageView);
+    }
+
+
 
     /**
      * 加载图片长方形图片

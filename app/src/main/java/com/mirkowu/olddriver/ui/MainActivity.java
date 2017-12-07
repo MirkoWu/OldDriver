@@ -33,15 +33,16 @@ public class MainActivity extends RefreshActivity<MainPresenter, ActivityMainBin
     @Override
     protected void initialize() {
         super.initialize();
-        jokeAdapter = new JokeAdapter(R.layout.item_joke, BR.bean);
+        jokeAdapter = new JokeAdapter(this, R.layout.item_joke, BR.bean);
         binding.mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.mRecyclerView.setAdapter(jokeAdapter);
         jokeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                // TODO: 2017/11/22 详情
+
             }
         });
+
         binding.mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {

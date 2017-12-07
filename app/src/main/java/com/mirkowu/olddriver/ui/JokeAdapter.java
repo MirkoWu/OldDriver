@@ -1,5 +1,6 @@
 package com.mirkowu.olddriver.ui;
 
+import android.app.Activity;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -21,10 +22,12 @@ import java.util.List;
  */
 
 public class JokeAdapter extends DataBindingAdapter<JokeBean.DataBean> {
-
+    Activity activity;
     public static final String url = "http://f2.dn.anqu.com/down/NjFkNQ==/allimg/1308/54-130R1093137.jpg";
-    public JokeAdapter(int mLayoutResId, int variable) {
+
+    public JokeAdapter(Activity activity, int mLayoutResId, int variable) {
         super(mLayoutResId, variable);
+        this.activity = activity;
     }
 
     @Override
@@ -42,7 +45,9 @@ public class JokeAdapter extends DataBindingAdapter<JokeBean.DataBean> {
         adapter.setOnItemClickListener(new NineGridImageAdapter.OnItemClickListener<JokeBean.DataBean.GroupBean.LargeImageBean>() {
             @Override
             public void onItemClick(View v, int position, JokeBean.DataBean.GroupBean.LargeImageBean data) {
-                PreviewActivity.openActivity(mContext, data.getUrl_list().get(0).getUrl());
+                //  PreviewActivity.openActivity(mContext, data.getUrl_list().get(0).getUrl());
+                String url = data.getUrl_list().get(0).getUrl();
+                PreviewActivity.startOptionsActivity(activity, v, url);
             }
         });
         nineGridImageView.setAdapter(adapter);

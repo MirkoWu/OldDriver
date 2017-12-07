@@ -50,6 +50,7 @@ public abstract class DataBindingActivity<B extends ViewDataBinding> extends RxA
     protected void initContentView() {
         commonToolbar = setToolbar();
         if (commonToolbar != null) {
+            commonToolbar.showStatusBar();
             //添加标题栏
             LinearLayout view = new LinearLayout(this);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);

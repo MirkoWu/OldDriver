@@ -8,17 +8,18 @@
         android:layout_height="match_parent"
         tools:context="com.mirkowu.olddriver.ui.PreviewActivity">
 
-        <ScrollView
+     <!--   <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent">-->
 
-            <android.support.v7.widget.AppCompatImageView
+            <com.mirkowu.olddriver.widget.ScaleImageView
                 android:id="@+id/mImageView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clickable="true"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY" />
-        </ScrollView>
+      <!-- </ScrollView>-->
     </android.support.constraint.ConstraintLayout>
 </layout>
 
