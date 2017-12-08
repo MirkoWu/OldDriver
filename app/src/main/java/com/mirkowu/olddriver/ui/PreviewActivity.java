@@ -8,13 +8,9 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.view.View;
 
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.mirkowu.olddriver.R;
 import com.mirkowu.olddriver.app.Constants;
 import com.mirkowu.olddriver.databinding.ActivityPreviewBinding;
-import com.mirkowu.olddriver.utils.ImageUtil;
 import com.softgarden.baselibrary.base.databinding.DataBindingActivity;
 import com.softgarden.baselibrary.widget.CommonToolbar;
 
@@ -35,25 +31,26 @@ public class PreviewActivity extends DataBindingActivity<ActivityPreviewBinding>
     @Override
     protected void initialize() {
         String url = getIntent().getStringExtra(Constants.DATA);
-        ImageUtil.load(binding.mImageView, url, new RequestListener<String, GlideDrawable>() {
-            @Override
-            public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                return false;
-            }
-
-            @Override
-            public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        supportStartPostponedEnterTransition();
-                    }
-                });
-                return false;
-            }
-        });
+//        ImageUtil.load(binding.mImageView, url, new RequestListener<String, GlideDrawable>() {
+//            @Override
+//            public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        supportStartPostponedEnterTransition();
+//                    }
+//                });
+//                return false;
+//            }
+//        });
         supportPostponeEnterTransition();
         ViewCompat.setTransitionName(binding.mImageView, "image");
+        supportStartPostponedEnterTransition();
     }
 
     @Override
